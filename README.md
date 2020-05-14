@@ -230,6 +230,51 @@ class Customer
   end
 
 end
+
+class Waiter
+
+  attr_accessor :name, :yrs_experience
+
+  @@all = []
+
+  def initialize(name, yrs_experience)
+    @name = name
+    @yrs_experience = yrs_experience
+    @@all << self
+  end
+
+  def self.all
+    @@all
+  end
+
+  def worst_tipper
+    worst_tipped_meal = meals.min do |meal_a, meal_b|
+      meal_a.tip <=> meal_b.tip
+    end
+
+    worst_tipped_meal.customer
+  end
+
+end
+
+class Meal
+
+  attr_accessor :waiter, :customer, :total, :tip
+
+  @@all = []
+
+  def initialize(waiter, customer, total, tip=0)
+    @waiter = waiter
+    @customer = customer
+    @total = total
+    @tip = tip
+    @@all << self
+  end
+
+  def self.all
+    @@all
+  end
+end
 ```
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/ruby-objects-has-many-through-readme' title='Ruby Object Relations: Has-Many Through'>Ruby Object Relations: Has-Many Through</a> on Learn.co and start learning to code for free.</p>
